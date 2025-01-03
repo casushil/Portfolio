@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  EnvelopeIcon,
   CheckCircleIcon 
 } from '@heroicons/react/24/outline';
 import AnimatedHero from '../Animated/AnimatedHero';
