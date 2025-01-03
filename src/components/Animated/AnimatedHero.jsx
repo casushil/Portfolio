@@ -30,8 +30,7 @@ const AnimatedHero = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Enhanced background animations */}
+    <div className="min-h-screen relative overflow-hidden mt-16 md:mt-0">
       <motion.div
         variants={backgroundVariants}
         animate="animate"
@@ -43,7 +42,6 @@ const AnimatedHero = () => {
         className="absolute inset-0 bg-gradient-to-br from-[#288CF0] to-[#0070C0]"
       />
 
-      {/* Animated particles */}
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
@@ -70,12 +68,10 @@ const AnimatedHero = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-12">
           <div className="flex-1 text-white max-w-2xl">
-            {/* Simple white text for name */}
             <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white">
               Hi, I'm Sushil Poudel
             </h1>
 
-            {/* Animated titles */}
             <div className="h-16 mb-6">
               {titles.map((title, index) => (
                 <motion.div
@@ -108,7 +104,6 @@ const AnimatedHero = () => {
               Investment Management, and Personal Taxation to optimize corporate growth and individual wealth.
             </motion.p>
 
-            {/* Connect With Me button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -124,12 +119,8 @@ const AnimatedHero = () => {
                 </motion.button>
               </Link>
             </motion.div>
-
-            {/* Social Media Links */}
-        
           </div>
 
-          {/* Image section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
