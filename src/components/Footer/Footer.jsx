@@ -1,15 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
-import { Facebook, Linkedin, Instagram, Youtube, Twitter } from 'lucide-react';
+import { Facebook, Linkedin, Instagram, Youtube, Twitter , MailIcon} from 'lucide-react';
 
 const Footer = () => {
     const socialLinks= [
         { icon: Linkedin, url: 'https://www.linkedin.com/in/sushilpoudelll', color: 'hover:text-blue-600' },
         { icon: Facebook, url: 'https://www.facebook.com/sushilpoudelll', color: 'hover:text-blue-500' },
         { icon: Instagram, url: 'https://www.instagram.com/sushilpoudelll', color: 'hover:text-pink-500' },
+        { icon: MailIcon, url: 'https://mail.google.com/mail/?view=cm&fs=1&to=skpoudel@outlook.com', color: 'hover:text-blue-400' },
+
         { icon: Youtube, url: 'https://www.youtube.com/@sushilpoudelll', color: 'hover:text-red-600' },
-        { icon: Twitter, url: 'https://x.com/sushilpoudelll', color: 'hover:text-blue-400' }
+        { icon: Twitter, url: 'https://x.com/sushilpoudelll', color: 'hover:text-blue-400' },
       ];
     const socialLinks1 = [
       {
@@ -90,7 +92,7 @@ const Footer = () => {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-black hover:text-white transition-colors"
+                    className="text-black hover:text-sky-700		 transition-colors"
                   >
                     {item.name}
                   </a>
@@ -104,22 +106,22 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
               <li>
-              <a href="#tax-planning" className="text-black hover:text-white transition-colors">
+              <a href="#tax-planning" className="text-black hover:text-sky-700 transition-colors">
         Tax Planning
       </a>
     </li>
     <li>
-      <a href="#investment-advisory" className="text-black hover:text-white transition-colors">
+      <a href="#investment-advisory" className="text-black hover:text-sky-700 transition-colors">
         Investment Advisory
       </a>
     </li>
     <li>
-      <a href="#business-intelligence" className="text-black hover:text-white transition-colors">
+      <a href="#business-intelligence" className="text-black hover:text-sky-700 transition-colors">
         Business Intelligence
       </a>
     </li>
     <li>
-      <a href="#data-analytics" className="text-black hover:text-white transition-colors">
+      <a href="#data-analytics" className="text-black hover:text-sky-700 transition-colors">
         Data Analytics
       </a>
               </li>
