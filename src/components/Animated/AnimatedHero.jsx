@@ -89,7 +89,7 @@ const AnimatedHero = () => {
                     duration: 4,
                     repeat: Infinity,
                     repeatDelay: titles.length * 4 - 4,
-                    delay: index * 4,
+                    delay: index * 3,
                   }}
                   className="absolute text-3xl text-cyan-300 font-medium"
                 >
@@ -114,7 +114,7 @@ const AnimatedHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <Link to="/#contact-section">
+              <Link to="/cont">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -126,20 +126,7 @@ const AnimatedHero = () => {
             </motion.div>
 
             {/* Social Media Links */}
-            <div className="mt-8 flex space-x-6">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2 }}
-                  className={`text-white transition-colors ${social.color}`}
-                >
-                  <social.icon className="w-6 h-6" />
-                </motion.a>
-              ))}
-            </div>
+        
           </div>
 
           {/* Image section */}

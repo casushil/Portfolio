@@ -11,7 +11,18 @@ import Contact from './components/Contact/Contact';
 import JourneySection from './components/Journey/journey';
 import TaxationPage from './components/Services/tax';
 import EducationPage from './components/Journey/education';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 // Create a MainLayout component to hold the homepage content
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+};
 const MainLayout = () => {
   return (
     <>
@@ -33,9 +44,13 @@ const MainLayout = () => {
 function App() {
   return (
     <Router>
+      
       <div className="overflow-hidden">
+      <ScrollToTop />
+
         <Navbar />
         <Routes>
+
           <Route path="/" element={<MainLayout />} />
           <Route path="/consultation" element={<ConsultationPage />} />
           <Route path="/journey" element={<JourneySection/>}/>

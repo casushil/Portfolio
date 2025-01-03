@@ -8,11 +8,11 @@ const AboutMe = () => {
   const y = useTransform(scrollY, [0, 300], [0, -50]);
   
   const socialLinks = [
-    { icon: Linkedin, url: 'https://www.linkedin.com/in/sushilpoudelll', label: 'LinkedIn', color: 'hover:text-blue-600 hover:bg-blue-50/80' },
-    { icon: Facebook, url: 'https://www.facebook.com/sushilpoudelll', label: 'Facebook', color: 'hover:text-blue-500 hover:bg-blue-50/80' },
-    { icon: Instagram, url: 'https://www.instagram.com/sushilpoudelll', label: 'Instagram', color: 'hover:text-pink-500 hover:bg-pink-50/80' },
-    { icon: Youtube, url: 'https://www.youtube.com/@sushilpoudelll', label: 'YouTube', color: 'hover:text-red-600 hover:bg-red-50/80' },
-    { icon: Twitter, url: 'https://x.com/sushilpoudelll', label: 'X (Twitter)', color: 'hover:text-blue-400 hover:bg-blue-50/80' }
+    { icon: Linkedin, url: 'https://www.linkedin.com/in/sushilpoudelll', label: '', color: 'hover:text-blue-600 hover:bg-blue-50/80' },
+    { icon: Facebook, url: 'https://www.facebook.com/sushilpoudelll', label: '', color: 'hover:text-blue-500 hover:bg-blue-50/80' },
+    { icon: Instagram, url: 'https://www.instagram.com/sushilpoudelll', label: '', color: 'hover:text-pink-500 hover:bg-pink-50/80' },
+    { icon: Youtube, url: 'https://www.youtube.com/@sushilpoudelll', label: '', color: 'hover:text-red-600 hover:bg-red-50/80' },
+    { icon: Twitter, url: 'https://x.com/sushilpoudelll', label: '', color: 'hover:text-blue-400 hover:bg-blue-50/80' }
   ];
 
   return (
@@ -141,7 +141,6 @@ const AboutMe = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Connect With Me</h3>
               <div className="flex flex-wrap gap-4">
                 {socialLinks.map((social, index) => (
                   <motion.a

@@ -31,7 +31,14 @@ const Navbar = () => {
     if (to.startsWith('/#')) {
       const targetId = to.substring(2);
       if (location.pathname !== '/') {
-        navigate('/', { state: { scrollTo: targetId } });
+        // Navigate to home and then scroll after a short delay to ensure the elements are loaded
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
       } else {
         const element = document.getElementById(targetId);
         if (element) {
@@ -40,6 +47,7 @@ const Navbar = () => {
       }
     } else {
       navigate(to);
+      window.scrollTo(0, 0);
     }
     
     // Close menus after navigation
@@ -47,6 +55,7 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
     setIsMobileServicesOpen(false);
   };
+
 
   // Close mobile menu on route change
   useEffect(() => {
