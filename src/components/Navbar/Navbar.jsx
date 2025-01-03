@@ -19,7 +19,7 @@ const Navbar = () => {
         { name: 'Taxation', to: '/#tax' }
       ]
     },
-    { name: 'Education', to: '/education' },
+    { name: 'Certification', to: '/education' },
     { name: 'Blog', to: '/blog' },
     { name: 'Contact', to: '/cont' }
   ];

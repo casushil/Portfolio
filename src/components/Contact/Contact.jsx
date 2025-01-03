@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone,Facebook,Linkedin,Instagram,YOUTUBE } from 'lucide-react';
+
 
 const Contact = () => {
+    const socialLinks= [
+        { icon: Linkedin, url: 'https://www.linkedin.com/in/sushilpoudelll', color: 'hover:text-blue-600' },
+        { icon: Facebook, url: 'https://www.facebook.com/sushilpoudelll', color: 'hover:text-blue-500' },
+        { icon: Instagram, url: 'https://www.instagram.com/sushilpoudelll', color: 'hover:text-pink-500' },
+      ];
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -72,9 +78,35 @@ const Contact = () => {
                   +1 613 819 2655
                 </a>
               </div>
+              <motion.div 
+                               className="mt-8"
+                               initial={{ opacity: 0, y: 20 }}
+                               whileInView={{ opacity: 1, y: 0 }}
+                               viewport={{ once: true }}
+                               transition={{ delay: 0.4 }}
+                             >
+                               <div className="flex flex-wrap gap-4">
+                                 {socialLinks.map((social, index) => (
+                                   <motion.a
+                                     key={index}
+                                     href={social.url}
+                                     target="_blank"
+                                     rel="noopener noreferrer"
+                                     whileHover={{ scale: 1.05 }}
+                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg border border-blue-100/50 
+                                     backdrop-blur-sm transition-all duration-300 ${social.color} shadow-sm hover:shadow-md
+                                     bg-white/50`}
+                                   >
+                                     <social.icon className="w-5 h-5" />
+                                     <span className="text-gray-700">{social.label}</span>
+                                   </motion.a>
+                                 ))}
+                               </div>
+                             </motion.div>
+
             </div>
           </motion.div>
-
+           
           {/* Right side form */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
@@ -171,9 +203,12 @@ const Contact = () => {
             </form>
           </motion.div>
         </div>
+        
       </div>
     </section>
+    
   );
+
 };
 
 export default Contact;

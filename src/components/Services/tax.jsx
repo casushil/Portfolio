@@ -143,27 +143,7 @@ const TaxationPage = () => {
 
    
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#288CF0] to-[#0070C0]">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="container mx-auto px-4 text-center"
-        >
-          <h2 className="text-3xl font-bold text-white mb-8">
-            Ready to Optimize Your Tax Strategy?
-          </h2>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-[#288CF0] px-8 py-4 rounded-lg font-semibold 
-            shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Schedule a Consultation
-          </motion.button>
-        </motion.div>
-      </section>
+  
     </div>
   );
 };

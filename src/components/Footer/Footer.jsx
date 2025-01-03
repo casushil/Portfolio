@@ -1,9 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
+import { Facebook, Linkedin, Instagram, Youtube, Twitter } from 'lucide-react';
 
 const Footer = () => {
-    const socialLinks = [
+    const socialLinks= [
+        { icon: Linkedin, url: 'https://www.linkedin.com/in/sushilpoudelll', color: 'hover:text-blue-600' },
+        { icon: Facebook, url: 'https://www.facebook.com/sushilpoudelll', color: 'hover:text-blue-500' },
+        { icon: Instagram, url: 'https://www.instagram.com/sushilpoudelll', color: 'hover:text-pink-500' },
+        { icon: Youtube, url: 'https://www.youtube.com/@sushilpoudelll', color: 'hover:text-red-600' },
+        { icon: Twitter, url: 'https://x.com/sushilpoudelll', color: 'hover:text-blue-400' }
+      ];
+    const socialLinks1 = [
       {
         name: 'LinkedIn',
         url: 'https://www.linkedin.com/in/skpoudel/',
@@ -47,21 +55,31 @@ const Footer = () => {
             <p className="text-black mb-4">
               Chartered Accountant
             </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="text-black-100 hover:text-white transition-colors"
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
+            <motion.div 
+                     className="mt-8"
+                     initial={{ opacity: 0, y: 20 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     viewport={{ once: true }}
+                     transition={{ delay: 0.4 }}
+                   >
+                     <div className="flex flex-wrap gap-4">
+                       {socialLinks.map((social, index) => (
+                         <motion.a
+                           key={index}
+                           href={social.url}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           whileHover={{ scale: 1.05 }}
+                           className={`flex items-center gap-2 px-4 py-2 rounded-lg border border-blue-100/50 
+                           backdrop-blur-sm transition-all duration-300 ${social.color} shadow-sm hover:shadow-md
+                           bg-white/50`}
+                         >
+                           <social.icon className="w-5 h-5" />
+                           <span className="text-gray-700">{social.label}</span>
+                         </motion.a>
+                       ))}
+                     </div>
+                   </motion.div>
           </div>
 
           {/* Quick Links */}
@@ -112,10 +130,8 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <ul className="space-y-2 text-black">
-              <li>Lakota</li>
-              <li>Cincinatti, Ohio</li>
-              <li>Phone: </li>
-              <li>Email: casushilpoudel@outlook.com</li>
+              <li>Phone: +1 (641)-819-2655 </li>
+              <li>Email: skpoudel@outlook.com</li>
             </ul>
           </div>
         </div>
