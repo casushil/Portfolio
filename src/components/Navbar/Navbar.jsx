@@ -1,12 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 
 const Navbar = () => {
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
-  const dropdownRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -31,7 +29,6 @@ const Navbar = () => {
     if (to.startsWith('/#')) {
       const targetId = to.substring(2);
       if (location.pathname !== '/') {
-        // Navigate to home and then scroll after a short delay to ensure the elements are loaded
         navigate('/');
         setTimeout(() => {
           const element = document.getElementById(targetId);
@@ -50,12 +47,9 @@ const Navbar = () => {
       window.scrollTo(0, 0);
     }
     
-    // Close menus after navigation
-    setIsServicesOpen(false);
     setIsMobileMenuOpen(false);
     setIsMobileServicesOpen(false);
   };
-
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -84,30 +78,25 @@ const Navbar = () => {
               <div key={item.name} className="relative group">
                 {item.children ? (
                   // Dropdown menu
-                  <div>
-                    <button
-                      className="text-gray-800 hover:text-[#288CF0] px-3 py-2 rounded-md text-sm font-medium 
-                      flex items-center gap-1 transition-colors"
-                      onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    >
+                  <div className="relative">
+                    <div className="text-gray-800 hover:text-[#288CF0] px-3 py-2 rounded-md text-sm font-medium 
+                      flex items-center gap-1 transition-colors duration-200 cursor-pointer">
                       {item.name}
-                      <ChevronDown className={`h-4 w-4 transform transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    {isServicesOpen && (
-                      <div 
-                        className="absolute left-0 w-48 mt-2 bg-white rounded-md shadow-lg py-1 z-50"
-                      >
-                        {item.children.map((child) => (
-                          <div
-                            key={child.name}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleNavigation(child.to)}
-                          >
-                            {child.name}
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                      <ChevronDown className="h-4 w-4 transform transition-transform duration-200 group-hover:rotate-180" />
+                    </div>
+                    <div className="absolute left-0 w-48 mt-0 bg-white rounded-md shadow-lg py-1 z-50 
+                      opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+                      transition-all duration-200 ease-in-out">
+                      {item.children.map((child) => (
+                        <div
+                          key={child.name}
+                          onClick={() => handleNavigation(child.to)}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#288CF0] cursor-pointer"
+                        >
+                          {child.name}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ) : (
                   // Regular menu item

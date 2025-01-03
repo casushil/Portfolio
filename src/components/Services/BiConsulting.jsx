@@ -33,13 +33,13 @@ const BiConsulting = () => {
   ];
 
   return (
-    <section id="bi-consulting" className="py-22 bg-gray-50">
+    <section id="bi-consulting" className="py-28 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Business Intelligence Consulting</h2>
           <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
@@ -92,7 +92,7 @@ const BiConsulting = () => {
         </div>
 
         {/* Feature Highlights */}
-        <div className="mt-28">
+        <div className="mt-40">
           <div className="grid md:grid-cols-2 gap-14 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -158,20 +158,7 @@ const BiConsulting = () => {
         </div>
 
         {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-primary/90 transition-colors"
-          >
-           
-          </motion.button>
-        </motion.div>
+  
       </div>
     </section>
   );
