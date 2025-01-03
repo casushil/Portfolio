@@ -1,4 +1,3 @@
-// src/components/Contact/Contact.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -25,7 +24,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your form submission logic here
     console.log(formData);
   };
 
@@ -51,23 +49,23 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+      <div className="container mx-auto px-4 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-          <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="w-24 h-1 bg-blue-600 mx-auto mb-6 rounded-full"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Have questions about financial planning or business intelligence? 
             Let's discuss how I can help you achieve your goals.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
           {contactInfo.map((info, index) => (
             <motion.a
               key={info.title}
@@ -78,106 +76,119 @@ const Contact = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow"
+              className="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
-              <info.icon className="h-8 w-8 mx-auto text-primary mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">{info.title}</h3>
+              <info.icon className="h-8 w-8 mx-auto text-blue-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">{info.title}</h3>
               <p className="text-gray-600">{info.content}</p>
             </motion.a>
           ))}
         </div>
 
-        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+        <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="grid md:grid-cols-2">
-            <div className="bg-primary p-8 text-white">
+            <div className="bg-blue-600 p-8 lg:p-10 text-white">
               <h3 className="text-2xl font-bold mb-4">Let's Connect</h3>
-              <p className="mb-4">
+              <p className="text-blue-100 mb-8">
                 Schedule a consultation or send me a message. I'm here to help you
                 achieve your financial goals.
               </p>
               
-              <div className="space-y-4">
-                <h4 className="font-semibold">Office Hours:</h4>
-                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                <p>Saturday: By Appointment</p>
-                <p>Sunday: Closed</p>
+              <div>
+                <h4 className="text-xl font-bold text-white mb-4">Office Hours:</h4>
+                <div className="space-y-2 text-blue-100">
+                  <div className="flex justify-between items-center border-b border-blue-500/30 pb-2">
+                    <span>Monday - Friday:</span>
+                    <span>9:00 AM - 6:00 PM</span>
+                  </div>
+                  <div className="flex justify-between items-center border-b border-blue-500/30 pb-2">
+                    <span>Saturday:</span>
+                    <span>By Appointment</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Sunday:</span>
+                    <span>Closed</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-gray-700 mb-2">Name</label>
+            <div className="p-8 lg:p-10">
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="md:col-span-1">
+                  <label className="block text-gray-700 text-sm font-medium mb-1.5">Name</label>
                   <motion.input
-                    whileFocus={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.01 }}
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2">Email</label>
+                <div className="md:col-span-1">
+                  <label className="block text-gray-700 text-sm font-medium mb-1.5">Email</label>
                   <motion.input
-                    whileFocus={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.01 }}
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2">Phone</label>
+                <div className="md:col-span-1">
+                  <label className="block text-gray-700 text-sm font-medium mb-1.5">Phone</label>
                   <motion.input
-                    whileFocus={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.01 }}
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2">Subject</label>
+                <div className="md:col-span-1">
+                  <label className="block text-gray-700 text-sm font-medium mb-1.5">Subject</label>
                   <motion.input
-                    whileFocus={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.01 }}
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2">Message</label>
+                <div className="md:col-span-2">
+                  <label className="block text-gray-700 text-sm font-medium mb-1.5">Message</label>
                   <motion.textarea
-                    whileFocus={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.01 }}
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows="4"
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 resize-none"
                     required
                   />
                 </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="submit"
-                  className="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-accent/90 transition-colors"
-                >
-                  Send Message
-                </motion.button>
+                <div className="md:col-span-2">
+                  <motion.button
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    type="submit"
+                    className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md"
+                  >
+                    Send Message
+                  </motion.button>
+                </div>
               </form>
             </div>
           </div>

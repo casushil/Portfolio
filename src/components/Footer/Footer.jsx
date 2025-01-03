@@ -24,7 +24,7 @@ const Footer = () => {
       },
       {
         name: 'Email',
-        url: 'mailto:your.email@example.com',
+        url: 'casushilpoudel@outlook.com',
         icon: <EnvelopeIcon className="h-6 w-6" />
       }
     ];
@@ -43,7 +43,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <h3 className="text-2xl font-bold mb-4">Your Name</h3>
+            <h3 className="text-2xl font-bold mb-4">Sushil Poudel</h3>
             <p className="text-gray-400 mb-4">
               Chartered Accountant & Financial Advisor
             </p>
@@ -112,16 +112,16 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>123 Business Street</li>
-              <li>City, State 12345</li>
-              <li>Phone: (555) 123-4567</li>
-              <li>Email: contact@example.com</li>
+              <li>Lakota</li>
+              <li>Cincinatti, Ohio</li>
+              <li>Phone: </li>
+              <li>Email: casushilpoudel@outlook.com</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>© {new Date().getFullYear()} Your Name. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Sushil Poudel. All rights reserved.</p>
         </div>
       </div>
     </footer>

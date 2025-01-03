@@ -166,7 +166,7 @@ const BiConsulting = () => {
             >
               <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl">
                 <img
-                  src="/path-to-your-dashboard-image.jpg"
+                  src="t.png"
                   alt="Business Intelligence Dashboard"
                   className="object-cover"
                 />
