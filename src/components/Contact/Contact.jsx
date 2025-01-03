@@ -72,10 +72,10 @@ const Contact = () => {
               <div className="flex items-center space-x-4">
                 <Phone className="h-6 w-6 text-blue-600" />
                 <a 
-                  href="tel:+16138192655" 
+                  href="tel:+1 (641) 819-2655" 
                   className="text-gray-700 hover:text-blue-600 transition-colors"
                 >
-                  +1 613 819 2655
+                 +1 (641) 819-2655
                 </a>
               </div>
               <motion.div 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-
+import { Link } from 'react-router-dom';
 const JourneySection = () => {
   const { scrollY } = useScroll();
   
@@ -195,6 +195,7 @@ const JourneySection = () => {
           className="text-center mt-32"
         >
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to Write Your Success Story?</h2>
+           <Link to="/cont"> 
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -203,6 +204,7 @@ const JourneySection = () => {
           >
             Let's Connect
           </motion.button>
+          </Link>
         </motion.div>
       </div>
     </div>

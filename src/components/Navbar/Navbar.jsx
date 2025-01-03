@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const menuItems = [
     { name: 'Home', to: '/' },
-    { name: 'About', to: '/journey' },
+    { name: 'My Journey', to: '/journey' },
     {
       name: 'Services',
       children: [
