@@ -27,6 +27,7 @@ const AnimatedHero = () => {
           background: `linear-gradient(45deg, #288CF0 0%, #0070C0 100%)`,
         }}
       />
+      
 
       {/* Animated circles */}
       <motion.div
@@ -129,7 +130,7 @@ const AnimatedHero = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-[#0070C0] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
-                Learn More
+                Connect With Me
               </motion.button>
             </motion.div>
           </motion.div>

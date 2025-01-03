@@ -86,24 +86,24 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Tax Planning
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Investment Advisory
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Business Intelligence
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Data Analytics
-                </a>
+              <a href="#tax-planning" className="text-gray-400 hover:text-white transition-colors">
+        Tax Planning
+      </a>
+    </li>
+    <li>
+      <a href="#investment-advisory" className="text-gray-400 hover:text-white transition-colors">
+        Investment Advisory
+      </a>
+    </li>
+    <li>
+      <a href="#business-intelligence" className="text-gray-400 hover:text-white transition-colors">
+        Business Intelligence
+      </a>
+    </li>
+    <li>
+      <a href="#data-analytics" className="text-gray-400 hover:text-white transition-colors">
+        Data Analytics
+      </a>
               </li>
             </ul>
           </div>
