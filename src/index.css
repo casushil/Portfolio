@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #288CF0;
+  --accent-orange: #FF5000;
+  --secondary-blue: #0070C0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.section-padding {
+  padding: 6rem 0;
+}
+
+/* Custom utility classes for the Home component */
+.from-primary {
+  --tw-gradient-from: var(--primary-blue);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(40 140 240 / 0));
+}
+
+.to-secondary {
+  --tw-gradient-to: var(--secondary-blue);
+}
+
+.text-primary {
+  color: var(--primary-blue);
+}
+
+.text-secondary {
+  color: var(--secondary-blue);
+}
+
+.text-accent {
+  color: var(--accent-orange);
+}
+
+.bg-accent {
+  background-color: var(--accent-orange);
+}
