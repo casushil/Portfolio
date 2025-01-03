@@ -51,7 +51,7 @@ const BiConsulting = () => {
   ];
 
   return (
-    <section id="bi-consulting" className="py-20 bg-gray-50">
+    <section id="bi-consulting" className="py-22 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -110,8 +110,8 @@ const BiConsulting = () => {
         </div>
 
         {/* Feature Highlights */}
-        <div className="mt-20">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="mt-28">
+          <div className="grid md:grid-cols-2 gap-14 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
