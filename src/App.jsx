@@ -17,7 +17,10 @@ import AdminDashboard from './components/Admin/adminmanagement';
 import AdminLogin from './components/Admin/Adminlogin';
 import AdminSetup from './components/Admin/AdminSetup';
 import ProtectedRoute from './components/Admin/ProtectedRoute';
-// Create a MainLayout component to hold the homepage content
+// Create a 
+// ... other imports remain the same
+
+// Move ScrollToTop and MainLayout outside App
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   
@@ -27,6 +30,7 @@ const ScrollToTop = () => {
   
   return null;
 };
+
 const MainLayout = () => {
   return (
     <>
@@ -38,7 +42,7 @@ const MainLayout = () => {
       <div id="bi-consulting">
         <BiConsulting />
       </div>
-      <div id ="tax">
+      <div id="tax">
         <TaxationPage/>
       </div>
       <div id="contact">
@@ -48,38 +52,46 @@ const MainLayout = () => {
   );
 };
 
+// Create a wrapper component to handle layout
+const AppLayout = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
+  return (
+    <div className="overflow-hidden">
+      <ScrollToTop />
+      {!isAdminRoute && <Navbar />}
+      <Routes>
+        {/* Your existing routes */}
+        <Route path="/" element={<MainLayout />} />
+        <Route path="/consultation" element={<ConsultationPage />} />
+        <Route path="/journey" element={<JourneySection/>} />
+        <Route path="/taxation" element={<TaxationPage />} />
+        <Route path="/education" element={<EducationPage />} />
+        <Route path="/cont" element={<Contact />} />
+
+        {/* Admin routes */}
+        <Route path="/admin/setup" element={<AdminSetup />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route 
+          path="/admin/dashboard" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+      {!isAdminRoute && <Footer />}
+    </div>
+  );
+};
+
+// Main App component
 function App() {
   return (
     <Router>
-      
-      <div className="overflow-hidden">
-      <ScrollToTop />
-
-        <Navbar />
-        <Routes>
-  {/* Your existing routes */}
-  <Route path="/" element={<MainLayout />} />
-  <Route path="/consultation" element={<ConsultationPage />} />
-  <Route path="/journey" element={<JourneySection/>} />
-  <Route path="/taxation" element={<TaxationPage />} />
-  <Route path="/education" element={<EducationPage />} />
-  <Route path="/cont" element={<Contact />} />
-
-  {/* New admin routes */}
-  <Route path="/admin/setup" element={<AdminSetup />} />
-  <Route path="/admin" element={<AdminLogin />} />
-  <Route 
-    path="/admin/dashboard" 
-    element={
-      <ProtectedRoute>
-        <AdminDashboard />
-      </ProtectedRoute>
-    } 
-  />
-</Routes>
-
-        <Footer />
-      </div>
+      <AppLayout />
     </Router>
   );
 }
