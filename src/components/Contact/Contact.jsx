@@ -37,13 +37,13 @@ const Contact = () => {
     {
       icon: EnvelopeIcon,
       title: 'Email',
-      content: 'contact@example.com',
-      link: 'mailto:contact@example.com'
+      content: 'skpoudel@outlook.com',
+      link: 'mailto:skpoudek@outlook.com'
     },
     {
       icon: MapPinIcon,
       title: 'Office',
-      content: '123 Business Street, City, State 12345',
+      content: 'Cincinatti, Ohio ',
       link: 'https://maps.google.com'
     }
   ];
