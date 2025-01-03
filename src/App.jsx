@@ -13,6 +13,10 @@ import TaxationPage from './components/Services/tax';
 import EducationPage from './components/Journey/education';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import AdminDashboard from './components/Admin/adminmanagement';
+import AdminLogin from './components/Admin/Adminlogin';
+import AdminSetup from './components/Admin/AdminSetup';
+import ProtectedRoute from './components/Admin/ProtectedRoute';
 // Create a MainLayout component to hold the homepage content
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -53,19 +57,27 @@ function App() {
 
         <Navbar />
         <Routes>
+  {/* Your existing routes */}
+  <Route path="/" element={<MainLayout />} />
+  <Route path="/consultation" element={<ConsultationPage />} />
+  <Route path="/journey" element={<JourneySection/>} />
+  <Route path="/taxation" element={<TaxationPage />} />
+  <Route path="/education" element={<EducationPage />} />
+  <Route path="/cont" element={<Contact />} />
 
-          <Route path="/" element={<MainLayout />} />
-          <Route path="/consultation" element={<ConsultationPage />} />
-          <Route path="/journey" element={<JourneySection/>}/>
-          <Route path="/taxation" element={<TaxationPage />} />
-          <Route path="/education" element={<EducationPage />} />
-          <Route path="/cont" element={<Contact />} />
+  {/* New admin routes */}
+  <Route path="/admin/setup" element={<AdminSetup />} />
+  <Route path="/admin" element={<AdminLogin />} />
+  <Route 
+    path="/admin/dashboard" 
+    element={
+      <ProtectedRoute>
+        <AdminDashboard />
+      </ProtectedRoute>
+    } 
+  />
+</Routes>
 
-
-
-
-
-        </Routes>
         <Footer />
       </div>
     </Router>
