@@ -58,14 +58,14 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav className="fixed w-full z-50 bg-white shadow-lg">
+    <nav className="fixed w-full z-50 bg-zinc-200 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <div onClick={() => handleNavigation('/')} className="cursor-pointer">
               <img
-                src="logo6.png"
+                src="logo9.jpg"
                 alt="Company Logo"
                 className="h-12 w-auto"
               />

@@ -38,14 +38,14 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-zinc-200 text-black">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-2xl font-bold mb-4">Sushil Poudel</h3>
-            <p className="text-gray-400 mb-4">
-              Chartered Accountant & Financial Advisor
+            <p className="text-black mb-4">
+              Chartered Accountant
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -56,7 +56,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-black-100 hover:text-white transition-colors"
                 >
                   {social.icon}
                 </motion.a>
@@ -72,7 +72,7 @@ const Footer = () => {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-black hover:text-white transition-colors"
                   >
                     {item.name}
                   </a>
@@ -86,22 +86,22 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
               <li>
-              <a href="#tax-planning" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#tax-planning" className="text-black hover:text-white transition-colors">
         Tax Planning
       </a>
     </li>
     <li>
-      <a href="#investment-advisory" className="text-gray-400 hover:text-white transition-colors">
+      <a href="#investment-advisory" className="text-black hover:text-white transition-colors">
         Investment Advisory
       </a>
     </li>
     <li>
-      <a href="#business-intelligence" className="text-gray-400 hover:text-white transition-colors">
+      <a href="#business-intelligence" className="text-black hover:text-white transition-colors">
         Business Intelligence
       </a>
     </li>
     <li>
-      <a href="#data-analytics" className="text-gray-400 hover:text-white transition-colors">
+      <a href="#data-analytics" className="text-black hover:text-white transition-colors">
         Data Analytics
       </a>
               </li>
@@ -111,7 +111,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-black">
               <li>Lakota</li>
               <li>Cincinatti, Ohio</li>
               <li>Phone: </li>
@@ -120,7 +120,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-black">
           <p>© {new Date().getFullYear()} Sushil Poudel. All rights reserved.</p>
         </div>
       </div>
