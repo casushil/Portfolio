@@ -1,18 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { collection, addDoc } from 'firebase/firestore';
-import { ImagePlus, Upload, X, AlignLeft, AlignCenter, AlignRight, 
-         Type, Bold, Italic, Underline, List, ListOrdered, Link, Image } from 'lucide-react';
+import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
+import { 
+  Upload, X, AlignLeft, AlignCenter, AlignRight,
+  Bold, Italic, Underline, List, ListOrdered, Link, Image 
+} from 'lucide-react';
 
-const BlogEditor = ({ storage, db, fetchBlogs }) => {
+const BlogEditor = ({ storage, db, fetchBlogs, initialBlog = null }) => {
+  // Initialize state with initial blog data if it exists
   const [blogData, setBlogData] = useState({
-    title: '',
-    authorName: '',
-    category: '',
-    description: ''
+    title: initialBlog?.title || '',
+    authorName: initialBlog?.authorName || '',
+    category: initialBlog?.category || '',
+    description: initialBlog?.description || ''
   });
+  
   const [mainImage, setMainImage] = useState(null);
-  const [mainImagePreview, setMainImagePreview] = useState('');
+  const [mainImagePreview, setMainImagePreview] = useState(initialBlog?.mainImage || '');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFont, setSelectedFont] = useState('Arial');
   const [fontSize, setFontSize] = useState('16');
@@ -29,6 +33,13 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
     'Trebuchet MS',
     'Impact'
   ];
+
+  // Initialize editor content when component mounts or initialBlog changes
+  useEffect(() => {
+    if (editorRef.current && initialBlog) {
+      editorRef.current.innerHTML = initialBlog.content || '';
+    }
+  }, [initialBlog]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -64,12 +75,12 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
         const range = selection.getRangeAt(0);
         range.insertNode(img);
         
-        // Make image draggable
         img.draggable = true;
         img.addEventListener('dragstart', handleDragStart);
         img.addEventListener('dragend', handleDragEnd);
       } catch (error) {
         console.error('Error uploading image:', error);
+        alert('Error uploading image: ' + error.message);
       }
     }
   };
@@ -104,9 +115,13 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
   };
 
   const getSizeMapping = (px) => {
-    // Convert px to approximate size values (1-7)
     const size = Math.round(px / 4);
     return Math.max(1, Math.min(7, size));
+  };
+
+  const handleLink = () => {
+    const url = prompt('Enter URL:');
+    if (url) formatDoc('createLink', url);
   };
 
   const validateForm = () => {
@@ -126,7 +141,7 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
       alert('Please enter a brief description');
       return false;
     }
-    if (!mainImage) {
+    if (!mainImagePreview && !initialBlog?.mainImage) {
       alert('Please upload a main image');
       return false;
     }
@@ -142,12 +157,15 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
 
     setIsLoading(true);
     try {
-      // Upload main image
-      const imageRef = ref(storage, `blog-covers/${Date.now()}_${mainImage.name}`);
-      await uploadBytes(imageRef, mainImage);
-      const mainImageUrl = await getDownloadURL(imageRef);
+      let mainImageUrl = mainImagePreview;
 
-      // Create blog post object
+      // Only upload new image if it was changed
+      if (mainImage) {
+        const imageRef = ref(storage, `blog-covers/${Date.now()}_${mainImage.name}`);
+        await uploadBytes(imageRef, mainImage);
+        mainImageUrl = await getDownloadURL(imageRef);
+      }
+
       const blogPost = {
         title: blogData.title,
         authorName: blogData.authorName,
@@ -155,24 +173,31 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
         description: blogData.description,
         content: editorRef.current.innerHTML,
         mainImage: mainImageUrl,
-        createdAt: new Date().toISOString()
+        updatedAt: new Date().toISOString()
       };
 
-      // Add to Firestore
-      await addDoc(collection(db, 'blogs'), blogPost);
+      if (initialBlog) {
+        // Update existing blog
+        await updateDoc(doc(db, 'blogs', initialBlog.id), blogPost);
+        alert('Blog updated successfully!');
+      } else {
+        // Create new blog
+        blogPost.createdAt = new Date().toISOString();
+        await addDoc(collection(db, 'blogs'), blogPost);
+        alert('Blog published successfully!');
 
-      // Reset form
-      setBlogData({
-        title: '',
-        authorName: '',
-        category: '',
-        description: ''
-      });
-      setMainImage(null);
-      setMainImagePreview('');
-      editorRef.current.innerHTML = '';
+        // Only reset form for new blog creation
+        setBlogData({
+          title: '',
+          authorName: '',
+          category: '',
+          description: ''
+        });
+        setMainImage(null);
+        setMainImagePreview('');
+        editorRef.current.innerHTML = '';
+      }
       
-      alert('Blog published successfully!');
       if (typeof fetchBlogs === 'function') {
         fetchBlogs();
       }
@@ -182,11 +207,6 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleLink = () => {
-    const url = prompt('Enter URL:');
-    if (url) formatDoc('createLink', url);
   };
 
   // Enable drag and drop for the editor
@@ -224,7 +244,9 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-xl font-semibold mb-4">Blog Editor</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        {initialBlog ? 'Edit Blog Post' : 'Create New Blog Post'}
+      </h2>
       
       {/* Main Cover Image Upload */}
       <div className="mb-6">
@@ -244,7 +266,10 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
           ) : (
             <div className="relative">
               <button
-                onClick={() => setMainImagePreview('')}
+                onClick={() => {
+                  setMainImage(null);
+                  setMainImagePreview('');
+                }}
                 className="absolute -top-3 -right-3 p-1 bg-red-500 text-white rounded-full hover:bg-red-600"
               >
                 <X className="w-4 h-4" />
@@ -411,7 +436,7 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
         </ul>
       </div>
 
-      {/* Publish Button */}
+      {/* Publish/Update Button */}
       <button
         onClick={publishBlog}
         disabled={isLoading}
@@ -421,14 +446,12 @@ const BlogEditor = ({ storage, db, fetchBlogs }) => {
         {isLoading ? (
           <div className="flex items-center justify-center">
             <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2" />
-            Publishing...
+            {initialBlog ? 'Updating...' : 'Publishing...'}
           </div>
         ) : (
-          'Publish Blog Post'
+          initialBlog ? 'Update Blog Post' : 'Publish Blog Post'
         )}
       </button>
-
-      {/* Preview Modal could be added here */}
     </div>
   );
 };

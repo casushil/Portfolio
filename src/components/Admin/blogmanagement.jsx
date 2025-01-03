@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { collection, query, orderBy, getDocs, deleteDoc, doc, getDoc } from 'firebase/firestore';
-import { db } from '../../config/firebase';
-import { Edit2, Trash2, Eye, ChevronDown } from 'lucide-react';
+import { collection, query, orderBy, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { db, storage } from '../../config/firebase';
+import { Edit2, Trash2, ChevronDown } from 'lucide-react';
 import BlogEditor from './Blogeditor';
 
 const BlogManagement = () => {
@@ -25,6 +25,7 @@ const BlogManagement = () => {
       setBlogs(blogsList);
     } catch (error) {
       console.error('Error fetching blogs:', error);
+      alert('Error fetching blogs: ' + error.message);
     } finally {
       setLoading(false);
     }
@@ -43,15 +44,8 @@ const BlogManagement = () => {
     }
   };
 
-  const handleEdit = async (blogId) => {
-    try {
-      const blogDoc = await getDoc(doc(db, 'blogs', blogId));
-      if (blogDoc.exists()) {
-        setEditingBlog({ id: blogDoc.id, ...blogDoc.data() });
-      }
-    } catch (error) {
-      console.error('Error fetching blog for edit:', error);
-    }
+  const handleEdit = (blog) => {
+    setEditingBlog(blog);
   };
 
   const toggleExpand = (blogId) => {
@@ -79,10 +73,12 @@ const BlogManagement = () => {
             ← Back to Blog List
           </button>
           <BlogEditor 
+            storage={storage}
+            db={db}
             initialBlog={editingBlog}
-            onSuccess={() => {
-              setEditingBlog(null);
+            fetchBlogs={() => {
               fetchBlogs();
+              setEditingBlog(null);
             }}
           />
         </div>
@@ -103,11 +99,14 @@ const BlogManagement = () => {
                         {new Date(blog.createdAt).toLocaleDateString()}
                       </time>
                     </div>
+                    {blog.description && (
+                      <p className="text-gray-600 mb-4">{blog.description}</p>
+                    )}
                   </div>
                   
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => handleEdit(blog.id)}
+                      onClick={() => handleEdit(blog)}
                       className="p-2 text-blue-500 hover:bg-blue-50 rounded-full"
                       title="Edit blog"
                     >
@@ -133,13 +132,15 @@ const BlogManagement = () => {
                 </div>
 
                 {/* Blog Preview Image */}
-                <div className="relative h-48 mt-4 rounded-lg overflow-hidden">
-                  <img 
-                    src={blog.mainImage} 
-                    alt={blog.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
+                {blog.mainImage && (
+                  <div className="relative h-48 mt-4 rounded-lg overflow-hidden">
+                    <img 
+                      src={blog.mainImage} 
+                      alt={blog.title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                )}
 
                 {/* Expanded Content */}
                 {expandedBlog === blog.id && (
