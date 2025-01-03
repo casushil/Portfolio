@@ -15,13 +15,7 @@ const Navbar = () => {
     { name: 'Contact', to: '/#contact' },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
 
   const handleHashLinkClick = (e, hash) => {
     if (hash.startsWith('/#')) {
@@ -35,11 +29,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-lg' : 'bg-transparent'
-      }`}
-    >
+    <nav className="fixed w-full z-50 bg-white shadow-lg">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <motion.div
@@ -49,7 +40,7 @@ const Navbar = () => {
           >
             <Link to="/" className="flex items-center">
               <img
-                src="/logo2.png" // Make sure to place your logo in the public folder
+                src="logo5.png" // Make sure to place your logo in the public folder
                 alt="Company Logo"
                 className="h-12 w-auto" // Adjust size as needed
               />
