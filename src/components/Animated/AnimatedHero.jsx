@@ -1,13 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calculator, ChartBar, Shield, Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Facebook, Linkedin, Instagram, Youtube, Twitter } from 'lucide-react';
 
 const AnimatedHero = () => {
-  const expertise = [
-    { icon: <Calculator className="w-6 h-6" />, text: "Financial Advisory" },
-    { icon: <ChartBar className="w-6 h-6" />, text: "Business Intelligence" },
-    { icon: <Shield className="w-6 h-6" />, text: "Tax Planning" }
+  const titles = [
+    "Chartered Accountant",
+    "Financial Analyst",
+    "BI Specialist",
+    "Investment Manager"
+  ];
+
+  const socialLinks = [
+    { icon: Linkedin, url: 'https://www.linkedin.com/in/sushilpoudelll', color: 'hover:text-blue-600' },
+    { icon: Facebook, url: 'https://www.facebook.com/sushilpoudelll', color: 'hover:text-blue-500' },
+    { icon: Instagram, url: 'https://www.instagram.com/sushilpoudelll', color: 'hover:text-pink-500' },
+    { icon: Youtube, url: 'https://www.youtube.com/@sushilpoudelll', color: 'hover:text-red-600' },
+    { icon: Twitter, url: 'https://x.com/sushilpoudelll', color: 'hover:text-blue-400' }
   ];
 
   const backgroundVariants = {
@@ -20,20 +29,8 @@ const AnimatedHero = () => {
     }
   };
 
-  const floatingVariants = {
-    animate: {
-      y: [-20, 20],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut"
-      }
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
       {/* Enhanced background animations */}
       <motion.div
         variants={backgroundVariants}
@@ -43,7 +40,7 @@ const AnimatedHero = () => {
           repeat: Infinity,
           repeatType: "reverse",
         }}
-        className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800"
+        className="absolute inset-0 bg-gradient-to-br from-[#288CF0] to-[#0070C0]"
       />
 
       {/* Animated particles */}
@@ -72,170 +69,87 @@ const AnimatedHero = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-screen py-12">
-          {/* Enhanced left content section */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex-1 text-white max-w-2xl"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-400 to-teal-500 px-4 py-2 rounded-full mb-6 shadow-lg"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span className="text-white font-medium">Chartered Accountant & Financial Advisor</span>
-            </motion.div>
+          <div className="flex-1 text-white max-w-2xl">
+            {/* Simple white text for name */}
+            <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white">
+              Hi, I'm Sushil Poudel
+            </h1>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="text-5xl lg:text-7xl font-bold mb-6 relative"
-            >
-              {/* Animated "I am" text */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="relative inline-block"
-              >
-                <motion.span
-                  animate={{
-                    color: ['#ffffff', '#a5f3fc', '#ffffff'],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                  className="relative z-10"
-                >
-                  I am
-                </motion.span>
+            {/* Animated titles */}
+            <div className="h-16 mb-6">
+              {titles.map((title, index) => (
                 <motion.div
-                  className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-teal-400 opacity-20 blur-lg"
+                  key={title}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{
-                    scale: [1, 1.2, 1],
+                    opacity: [0, 1, 1, 0],
+                    y: [20, 0, 0, -20],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 4,
                     repeat: Infinity,
-                    repeatType: "reverse"
+                    repeatDelay: titles.length * 4 - 4,
+                    delay: index * 4,
                   }}
-                />
-              </motion.div>
-              <br />
-              <motion.span
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ 
-                  duration: 1.5,
-                  delay: 0.8,
-                  ease: "easeInOut"
-                }}
-                className="inline-block whitespace-nowrap overflow-hidden"
-              >
-                <span className="inline-block bg-gradient-to-r from-white via-cyan-200 to-emerald-100 bg-clip-text text-transparent">
-                  Sushil Poudel
-                </span>
-              </motion.span>
-            </motion.h1>
+                  className="absolute text-3xl text-cyan-300 font-medium"
+                >
+                  {title}
+                </motion.div>
+              ))}
+            </div>
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-lg mb-8 leading-relaxed max-w-xl"
+              className="text-lg mb-8 leading-relaxed text-white/90"
             >
-              <motion.span
-                animate={{
-                  color: ['rgba(255,255,255,0.9)', 'rgba(165,243,252,1)', 'rgba(255,255,255,0.9)']
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-                className="text-white/90"
-              >
-            
-              Empowering individuals, small and medium scale businesses through strategic financial planning and expert guidance. 
-              With extensive experience in financial advisory and business intelligence, 
-              I help organizations and individuals achieve their financial goals.
-              </motion.span>
+              A strategic finance professional combining Business Analytics, Financial Planning, 
+              Investment Management, and Personal Taxation to optimize corporate growth and individual wealth.
             </motion.p>
 
-            {/* Enhanced expertise pills */}
+            {/* Connect With Me button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
-              className="flex flex-wrap gap-4 mb-8"
+              transition={{ delay: 0.8 }}
             >
-              {expertise.map((item, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1 }}
-                  className="flex items-center gap-2 bg-white/10 backdrop-blur-lg px-4 py-2 rounded-full text-white border border-white/20 shadow-lg hover:border-white/40 transition-colors"
-                >
-                  {item.icon}
-                  <span>{item.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Enhanced buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="flex gap-4"
-            >
-              <Link to="/consultation">
-                <motion.button
-                  whileHover={{ scale: 1.05, backgroundColor: "#10b981" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="group flex items-center gap-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                >
-                  Schedule Consultation
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                  </motion.div>
-                </motion.button>
-              </Link>
-              <a 
-                href="https://www.linkedin.com/in/skpoudel/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
+              <Link to="/#contact-section">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-white to-gray-100 text-blue-600 px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+                  className="bg-white text-[#288CF0] px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all"
                 >
                   Connect With Me
                 </motion.button>
-              </a>
+              </Link>
             </motion.div>
-          </motion.div>
 
-          {/* Enhanced right image section */}
+            {/* Social Media Links */}
+            <div className="mt-8 flex space-x-6">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.2 }}
+                  className={`text-white transition-colors ${social.color}`}
+                >
+                  <social.icon className="w-6 h-6" />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+
+          {/* Image section */}
           <motion.div
-            variants={floatingVariants}
-            animate="animate"
-            className="flex-1 mt-12 lg:mt-0 relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="flex-1 mt-12 lg:mt-0"
           >
             <div className="relative">
-              {/* Enhanced decorative elements */}
               <motion.div
                 animate={{
                   rotate: [0, 360],
@@ -261,13 +175,7 @@ const AnimatedHero = () => {
                 className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full opacity-30 blur-lg"
               />
               
-              {/* Enhanced image container */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-                className="relative z-10 rounded-2xl overflow-hidden border-4 border-white/20 shadow-2xl backdrop-blur-sm bg-white/10"
-              >
+              <div className="relative rounded-2xl overflow-hidden border-4 border-white/20 shadow-2xl">
                 <motion.div
                   animate={{
                     boxShadow: [
@@ -281,25 +189,14 @@ const AnimatedHero = () => {
                     repeat: Infinity,
                     repeatType: "reverse"
                   }}
-                  className="relative"
                 >
                   <img
-                    src="1690727439575.jpeg"
-                    alt="CA Sushil Poudel"
+                    src="pfpsush.jpg"
+                    alt="Sushil Poudel"
                     className="w-full h-full object-cover"
                   />
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0, 0.1, 0] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
-                    className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-transparent"
-                  />
                 </motion.div>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>

@@ -4,7 +4,7 @@ import {
   CheckCircleIcon 
 } from '@heroicons/react/24/outline';
 import AnimatedHero from '../Animated/AnimatedHero';
-
+import AboutMe from './aboutME';
 const Home = () => {
   
 
@@ -19,6 +19,7 @@ const Home = () => {
     <div className="min-h-screen">
           {/* Replace the old hero section with the new AnimatedHero */}
           <AnimatedHero />
+          <AboutMe/>
 
 
       {/* Quick Stats Section */}

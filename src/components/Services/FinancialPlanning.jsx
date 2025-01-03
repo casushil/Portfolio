@@ -125,20 +125,7 @@ const FinancialPlanning = () => {
           ))}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-accent text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent/90 transition-colors"
-          >
-            Schedule a Financial Planning Session
-          </motion.button>
-        </motion.div>
+
       </div>
     </section>
   );

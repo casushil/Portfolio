@@ -5,10 +5,12 @@ import Hero from './components/Hero/Hero';
 import Home from './components/Home/Home';
 import FinancialPlanning from './components/Services/FinancialPlanning';
 import BiConsulting from './components/Services/BiConsulting';
-import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import ConsultationPage from './components/Consultation/consult';
-
+import Contact from './components/Contact/Contact';
+import JourneySection from './components/Journey/journey';
+import TaxationPage from './components/Services/tax';
+import EducationPage from './components/Journey/education';
 // Create a MainLayout component to hold the homepage content
 const MainLayout = () => {
   return (
@@ -36,6 +38,15 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />} />
           <Route path="/consultation" element={<ConsultationPage />} />
+          <Route path="/journey" element={<JourneySection/>}/>
+          <Route path="/taxation" element={<TaxationPage />} />
+          <Route path="/education" element={<EducationPage />} />
+          <Route path="/cont" element={<Contact />} />
+
+
+
+
+
         </Routes>
         <Footer />
       </div>

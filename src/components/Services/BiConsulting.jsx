@@ -187,7 +187,7 @@ const BiConsulting = () => {
             whileTap={{ scale: 0.95 }}
             className="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-primary/90 transition-colors"
           >
-            Schedule a BI Consultation
+           
           </motion.button>
         </motion.div>
       </div>
