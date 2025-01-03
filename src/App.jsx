@@ -34,6 +34,9 @@ const MainLayout = () => {
       <div id="bi-consulting">
         <BiConsulting />
       </div>
+      <div id ="tax">
+        <TaxationPage/>
+      </div>
       <div id="contact">
         <Contact />
       </div>

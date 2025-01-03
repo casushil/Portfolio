@@ -25,24 +25,6 @@ const BiConsulting = () => {
       color: "secondary"
     },
     {
-      title: "Strategic Planning",
-      description: "Develop data-backed strategies to drive business growth and competitive advantage.",
-      icon: LightBulbIcon,
-      color: "accent"
-    },
-    {
-      title: "Performance Metrics",
-      description: "Design and implement KPIs to track and improve business performance.",
-      icon: ArrowTrendingUpIcon,
-      color: "primary"
-    },
-    {
-      title: "Data Infrastructure",
-      description: "Build robust data infrastructure for efficient information management.",
-      icon: ServerIcon,
-      color: "secondary"
-    },
-    {
       title: "Data Visualization",
       description: "Create interactive dashboards and reports for better decision-making.",
       icon: CircleStackIcon,

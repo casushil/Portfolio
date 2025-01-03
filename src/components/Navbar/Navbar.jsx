@@ -18,7 +18,7 @@ const Navbar = () => {
       children: [
         { name: 'Financial Planning', to: '/#financial-planning' },
         { name: 'BI Consulting', to: '/#bi-consulting' },
-        { name: 'Taxation', to: '/taxation' }
+        { name: 'Taxation', to: '/#tax' }
       ]
     },
     { name: 'Education', to: '/education' },

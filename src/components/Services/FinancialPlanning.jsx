@@ -12,21 +12,7 @@ import {
 
 const FinancialPlanning = () => {
   const services = [
-    {
-      title: "Tax Planning & Optimization",
-      description: "Strategic tax planning to minimize liabilities and maximize returns through legal tax optimization strategies.",
-      icon: CurrencyDollarIcon
-    },
-    {
-      title: "Investment Advisory",
-      description: "Expert guidance on investment opportunities and portfolio management tailored to your risk profile.",
-      icon: ChartBarIcon
-    },
-    {
-      title: "Risk Management",
-      description: "Comprehensive risk assessment and management strategies to protect your financial interests.",
-      icon: ShieldCheckIcon
-    },
+
     {
       title: "Financial Reporting",
       description: "Detailed financial reports and analysis to track performance and make informed decisions.",
@@ -38,7 +24,7 @@ const FinancialPlanning = () => {
       icon: PresentationChartLineIcon
     },
     {
-      title: "Corporate Finance",
+      title: "Corporate Finance and Strategic Planning",
       description: "Strategic financial planning and management solutions for businesses of all sizes.",
       icon: BuildingOfficeIcon
     }
