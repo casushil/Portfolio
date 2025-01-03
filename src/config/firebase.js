@@ -4,15 +4,18 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
 
+// For debugging - remove in production
+console.log("Project ID:", process.env.REACT_APP_FIREBASE_PROJECT_ID);
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAl2MVGKLOG9HHfIMufJtNjiPzGtUzxjCk",
-  authDomain: "db-form-2a2d8.firebaseapp.com",
-  projectId: "db-form-2a2d8",
-  storageBucket: "db-form-2a2d8.firebasestorage.app",
-  messagingSenderId: "989228920697",
-  appId: "1:989228920697:web:c679ea3690cfddef9409a8",
-  measurementId: "G-Y9PW5QF3BT"
-};
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

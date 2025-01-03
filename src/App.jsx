@@ -17,10 +17,10 @@ import AdminDashboard from './components/Admin/adminmanagement';
 import AdminLogin from './components/Admin/Adminlogin';
 import AdminSetup from './components/Admin/AdminSetup';
 import ProtectedRoute from './components/Admin/ProtectedRoute';
-// Create a 
-// ... other imports remain the same
+import BlogPage from './components/Admin/blogpage';
+import BlogPost from './components/blog/blog';
 
-// Move ScrollToTop and MainLayout outside App
+// ScrollToTop component
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   
@@ -31,6 +31,7 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Main layout for home page
 const MainLayout = () => {
   return (
     <>
@@ -52,37 +53,51 @@ const MainLayout = () => {
   );
 };
 
-// Create a wrapper component to handle layout
+// Wrapper for blog post layout
+const BlogPostLayout = () => {
+  return (
+    <div className="min-h-screen">
+      <BlogPost />
+    </div>
+  );
+};
+
+// App layout component
 const AppLayout = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+  const isBlogPost = location.pathname.startsWith('/blog/') && location.pathname !== '/blog';
 
   return (
     <div className="overflow-hidden">
       <ScrollToTop />
       {!isAdminRoute && <Navbar />}
-      <Routes>
-        {/* Your existing routes */}
-        <Route path="/" element={<MainLayout />} />
-        <Route path="/consultation" element={<ConsultationPage />} />
-        <Route path="/journey" element={<JourneySection/>} />
-        <Route path="/taxation" element={<TaxationPage />} />
-        <Route path="/education" element={<EducationPage />} />
-        <Route path="/cont" element={<Contact />} />
+      <main className={`${isBlogPost ? 'pt-20' : ''}`}>
+        <Routes>
+          {/* Main routes */}
+          <Route path="/" element={<MainLayout />} />
+          <Route path="/consultation" element={<ConsultationPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:id" element={<BlogPostLayout />} />
+          <Route path="/journey" element={<JourneySection />} />
+          <Route path="/taxation" element={<TaxationPage />} />
+          <Route path="/education" element={<EducationPage />} />
+          <Route path="/cont" element={<Contact />} />
 
-        {/* Admin routes */}
-        <Route path="/admin/setup" element={<AdminSetup />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route 
-          path="/admin/dashboard" 
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          } 
-        />
-      </Routes>
-      {!isAdminRoute && <Footer />}
+          {/* Admin routes */}
+          <Route path="/admin/setup" element={<AdminSetup />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route 
+            path="/admin/dashboard" 
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+        </Routes>
+      </main>
+      {(!isAdminRoute) && <Footer />}
     </div>
   );
 };

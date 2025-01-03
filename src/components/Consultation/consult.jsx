@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Contact from '../Contact/Contact';
 const ConsultationPage = () => {
+    
   const expertise = [
     {
       icon: ChartBarIcon,
