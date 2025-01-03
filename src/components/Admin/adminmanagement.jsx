@@ -13,30 +13,72 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('messages');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  
+  const [loginAttempts, setLoginAttempts] = useState(() => {
+    const saved = localStorage.getItem('loginAttempts');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+
+  const [lockoutTime, setLockoutTime] = useState(() => {
+    const saved = localStorage.getItem('lockoutTime');
+    return saved ? new Date(saved) : null;
+  });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      if (user) {
+        localStorage.removeItem('loginAttempts');
+        localStorage.removeItem('lockoutTime');
+        setLoginAttempts(0);
+        setLockoutTime(null);
+      }
     });
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    if (loginAttempts > 0) {
+      localStorage.setItem('loginAttempts', loginAttempts.toString());
+    }
+    if (lockoutTime) {
+      localStorage.setItem('lockoutTime', lockoutTime.toISOString());
+    }
+  }, [loginAttempts, lockoutTime]);
+  
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+    // Check for existing lockout
+    if (lockoutTime && new Date() < new Date(lockoutTime)) {
+      const minutesLeft = Math.ceil((new Date(lockoutTime) - new Date()) / 60000);
+      setError(`Account locked. Try again in ${minutesLeft} minutes`);
+      return;
+    }
+  
     setIsLoading(true);
     setError('');
     
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      setError('Invalid login credentials');
-      console.error('Login error:', error);
+      const newAttempts = loginAttempts + 1;
+      setLoginAttempts(newAttempts);
+      localStorage.setItem('loginAttempts', newAttempts.toString());
+      
+      if (newAttempts >= 5) {
+        const lockoutEndTime = new Date(new Date().getTime() + 30 * 60000);
+        setLockoutTime(lockoutEndTime);
+        localStorage.setItem('lockoutTime', lockoutEndTime.toISOString());
+        setError('Too many failed attempts. Account locked for 30 minutes');
+      } else {
+        setError(`Invalid email or password. ${5 - newAttempts} attempts remaining before lockout`);
+      }
     } finally {
       setIsLoading(false);
     }
   };
-
-  const handleLogout = async () => {
+    const handleLogout = async () => {
     try {
       await signOut(auth);
     } catch (error) {

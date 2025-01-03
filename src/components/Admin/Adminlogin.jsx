@@ -9,10 +9,26 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  const [loginAttempts, setLoginAttempts] = useState(() => {
+    const saved = localStorage.getItem('loginAttempts');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+
+  const [lockoutTime, setLockoutTime] = useState(() => {
+    const saved = localStorage.getItem('lockoutTime');
+    return saved ? new Date(saved) : null;
+  });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
+      if (user) {
+        localStorage.removeItem('loginAttempts');
+        localStorage.removeItem('lockoutTime');
+        setLoginAttempts(0);
+        setLockoutTime(null);
+      }
     });
 
     return () => unsubscribe();
@@ -20,13 +36,31 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (lockoutTime && new Date() < new Date(lockoutTime)) {
+      const minutesLeft = Math.ceil((new Date(lockoutTime) - new Date()) / 60000);
+      setError(`Account locked. Try again in ${minutesLeft} minutes`);
+      return;
+    }
+
     setLoading(true);
     setError('');
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      setError('Invalid email or password.');
+      const newAttempts = loginAttempts + 1;
+      setLoginAttempts(newAttempts);
+      localStorage.setItem('loginAttempts', newAttempts.toString());
+      
+      if (newAttempts >= 5) {
+        const lockoutEndTime = new Date(new Date().getTime() + 30 * 60000);
+        setLockoutTime(lockoutEndTime);
+        localStorage.setItem('lockoutTime', lockoutEndTime.toISOString());
+        setError('Too many failed attempts. Account locked for 30 minutes');
+      } else {
+        setError(`Invalid email or password. ${5 - newAttempts} attempts remaining before lockout`);
+      }
     }
     setLoading(false);
   };
