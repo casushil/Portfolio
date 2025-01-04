@@ -12,7 +12,7 @@ const Home = () => {
     { number: '8+', label: 'Years Experience' },
     { number: '100+', label: 'Clients Served' },
     { number: '100%', label: 'Client Satisfaction' },
-    { number: '3+', label: 'Industries Served' }
+    { number: '10+', label: 'Industries Served' }
   ];
 
   return (
