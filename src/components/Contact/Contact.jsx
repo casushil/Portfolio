@@ -162,7 +162,7 @@ const Contact = () => {
                     <div className="flex items-center gap-4">
                       <motion.a 
                         whileHover={{ scale: 1.1 }}
-                        href="https://www.linkedin.com/in/sushilpoudelll"
+                        href="https://www.linkedin.com/in/casushilpoudell"
                         target="_blank"
                         className="p-2 rounded-lg hover:bg-accent/50"
                       >
@@ -170,7 +170,7 @@ const Contact = () => {
                       </motion.a>
                       <motion.a 
                         whileHover={{ scale: 1.1 }}
-                        href="https://www.facebook.com/sushilpoudelll"
+                        href="https://www.facebook.com/casushilpoudel"
                         target="_blank"
                         className="p-2 rounded-lg hover:bg-accent/50"
                       >
@@ -178,7 +178,7 @@ const Contact = () => {
                       </motion.a>
                       <motion.a 
                         whileHover={{ scale: 1.1 }}
-                        href="https://www.instagram.com/sushilpoudelll"
+                        href="https://www.instagram.com/casushilpoudel"
                         target="_blank"
                         className="p-2 rounded-lg hover:bg-accent/50"
                       >

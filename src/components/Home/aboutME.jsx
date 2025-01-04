@@ -8,11 +8,11 @@ const AboutMe = () => {
   const y = useTransform(scrollY, [0, 300], [0, -50]);
   
   const socialLinks = [
-    { icon: Linkedin, url: 'https://www.linkedin.com/in/sushilpoudelll', label: '', color: 'hover:text-blue-600 hover:bg-blue-50/80' },
-    { icon: Facebook, url: 'https://www.facebook.com/sushilpoudelll', label: '', color: 'hover:text-blue-500 hover:bg-blue-50/80' },
-    { icon: Instagram, url: 'https://www.instagram.com/sushilpoudelll', label: '', color: 'hover:text-pink-500 hover:bg-pink-50/80' },
+    { icon: Linkedin, url: 'https://www.linkedin.com/in/casushilpoudell', label: '', color: 'hover:text-blue-600 hover:bg-blue-50/80' },
+    { icon: Facebook, url: 'https://www.facebook.com/casushilpoudel', label: '', color: 'hover:text-blue-500 hover:bg-blue-50/80' },
+    { icon: Instagram, url: 'https://www.instagram.com/casushilpoudel', label: '', color: 'hover:text-pink-500 hover:bg-pink-50/80' },
     { icon: Youtube, url: 'https://www.youtube.com/@sushilpoudelll', label: '', color: 'hover:text-red-600 hover:bg-red-50/80' },
-    { icon: Twitter, url: 'https://x.com/sushilpoudelll', label: '', color: 'hover:text-blue-400 hover:bg-blue-50/80' }
+    { icon: Twitter, url: 'https://x.com/casushilpoudel', label: '', color: 'hover:text-blue-400 hover:bg-blue-50/80' }
   ];
 
   return (
