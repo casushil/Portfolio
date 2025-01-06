@@ -208,6 +208,27 @@ const BlogEditor = ({ storage, db, fetchBlogs, initialBlog = null }) => {
       setIsLoading(false);
     }
   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'category' && value !== 'custom') {
+      setBlogData(prev => ({
+        ...prev,
+        category: value,
+        customCategory: '' // Clear custom category when selecting predefined option
+      }));
+    } else if (name === 'customCategory') {
+      setBlogData(prev => ({
+        ...prev,
+        category: 'custom',
+        customCategory: value
+      }));
+    } else {
+      setBlogData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+  };
 
   // Enable drag and drop for the editor
   useEffect(() => {
@@ -315,6 +336,8 @@ const BlogEditor = ({ storage, db, fetchBlogs, initialBlog = null }) => {
           <option value="Business Intelligence">Business Intelligence</option>
           <option value="Taxation">Taxation</option>
           <option value="Education">Education</option>
+          <option value="Personal Wealth">Personal Wealth</option>
+
         </select>
 
         <input
