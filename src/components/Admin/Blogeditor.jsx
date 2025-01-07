@@ -169,7 +169,8 @@ const BlogEditor = ({ storage, db, fetchBlogs, initialBlog = null }) => {
       const blogPost = {
         title: blogData.title,
         authorName: blogData.authorName,
-        category: blogData.category,
+        category: blogData.category === 'other' ? blogData.customCategory : blogData.category,
+
         description: blogData.description,
         content: editorRef.current.innerHTML,
         mainImage: mainImageUrl,
@@ -206,27 +207,6 @@ const BlogEditor = ({ storage, db, fetchBlogs, initialBlog = null }) => {
       alert('Error publishing blog: ' + error.message);
     } finally {
       setIsLoading(false);
-    }
-  };
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'category' && value !== 'custom') {
-      setBlogData(prev => ({
-        ...prev,
-        category: value,
-        customCategory: '' // Clear custom category when selecting predefined option
-      }));
-    } else if (name === 'customCategory') {
-      setBlogData(prev => ({
-        ...prev,
-        category: 'custom',
-        customCategory: value
-      }));
-    } else {
-      setBlogData(prev => ({
-        ...prev,
-        [name]: value
-      }));
     }
   };
 
@@ -315,7 +295,7 @@ const BlogEditor = ({ storage, db, fetchBlogs, initialBlog = null }) => {
           placeholder="Blog Title"
           className="w-full p-2 border rounded-lg"
         />
-        
+
         <input
           type="text"
           name="authorName"
@@ -325,21 +305,38 @@ const BlogEditor = ({ storage, db, fetchBlogs, initialBlog = null }) => {
           className="w-full p-2 border rounded-lg"
         />
         
-        <select
-          name="category"
-          value={blogData.category}
-          onChange={handleInputChange}
-          className="w-full p-2 border rounded-lg"
-        >
-          <option value="">Select Category</option>
-          <option value="Financial Planning">Financial Planning</option>
-          <option value="Business Intelligence">Business Intelligence</option>
-          <option value="Taxation">Taxation</option>
-          <option value="Education">Education</option>
-          <option value="Personal Wealth">Personal Wealth</option>
+        <div className="flex flex-col">
+  <select
+    name="category"
+    value={blogData.category}
+    onChange={handleInputChange}
+    className="w-full p-2 border rounded-lg"
+  >
+    <option value="">Select Category</option>
+    <option value="Financial Planning">Financial Planning</option>
+    <option value="Business Intelligence">Business Intelligence</option>
+    <option value="Taxation">Taxation</option>
+    <option value="Education">Education</option>
+    <option value="Personal Wealth">Personal Wealth</option>
+    <option value="other">Other</option>
+  </select>
 
-        </select>
-
+  {blogData.category === 'other' && (
+    <input
+      type="text"
+      name="customCategory"
+      value={blogData.customCategory || ''}
+      onChange={(e) => {
+        setBlogData(prev => ({
+          ...prev,
+          customCategory: e.target.value
+        }));
+      }}
+      placeholder="Enter custom category"
+      className="w-full p-2 border rounded-lg mt-2"
+    />
+  )}
+</div>
         <input
           type="text"
           name="description"
