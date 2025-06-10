@@ -35,7 +35,7 @@ const Footer = () => {
         { icon: Facebook, url: 'https://www.facebook.com/casushilpoudel', color: 'hover:text-blue-500' },
         { icon: Instagram, url: 'https://www.instagram.com/casushilpoudel', color: 'hover:text-pink-500' },
         { icon: MailIcon, url: 'https://mail.google.com/mail/?view=cm&fs=1&to=skpoudel@outlook.com', color: 'hover:text-blue-400' },
-        { icon: Youtube, url: 'https://www.youtube.com/@sushilpoudelll', color: 'hover:text-red-600' },
+        { icon: Youtube, url: 'https://www.youtube.com/@casushilpoudel', color: 'hover:text-red-600' },
         { icon: Twitter, url: 'https://x.com/casushilpoudel', color: 'hover:text-blue-400' },
     ];
 
