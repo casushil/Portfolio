@@ -124,8 +124,9 @@ const Contact = () => {
                   </p>
                 
                   <div className="space-y-6">
+              
                     <motion.a 
-                      href="mailto:skpoudel@outlook.com"
+                      href="mailto:caskpoudel@gmail.com"
                       whileHover={{ x: 5 }}
                       className="flex items-center space-x-4 group p-4 bg-card rounded-2xl hover:bg-accent/50 transition-colors"
                     >
@@ -135,7 +136,7 @@ const Contact = () => {
                       <div>
                         <p className="text-sm text-muted-foreground">Email</p>
                         <span className="font-medium text-foreground group-hover:text-foreground transition-colors">
-                          skpoudel@outlook.com
+                          caskpoudel@gmail.com
                         </span>
                       </div>
                     </motion.a>
