@@ -19,7 +19,7 @@ import AdminSetup from './components/Admin/AdminSetup';
 import ProtectedRoute from './components/Admin/ProtectedRoute';
 import BlogPage from './components/Admin/blogpage';
 import BlogPost from './components/blog/blog';
-
+import CardiologyPSGenerator from './components/Home/main';
 // ScrollToTop component
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -83,6 +83,8 @@ const AppLayout = () => {
           <Route path="/taxation" element={<TaxationPage />} />
           <Route path="/education" element={<EducationPage />} />
           <Route path="/cont" element={<Contact />} />
+          <Route path="/ps" element={<CardiologyPSGenerator />} />
+
 
           {/* Admin routes */}
           <Route path="/admin/setup" element={<AdminSetup />} />
