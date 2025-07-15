@@ -36,6 +36,8 @@ Cardiology continues to challenge and inspire me. From straw mosaics to shock ro
   const [programsData, setProgramsData] = useState([]);
   const [filteredPrograms, setFilteredPrograms] = useState([]);
   const [scoreThreshold, setScoreThreshold] = useState(50);
+  const [maxScoreThreshold, setMaxScoreThreshold] = useState(100);
+  const [useScoreRange, setUseScoreRange] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [processedEssays, setProcessedEssays] = useState([]);
   const [currentProcessingIndex, setCurrentProcessingIndex] = useState(0);
@@ -47,12 +49,21 @@ Cardiology continues to challenge and inspire me. From straw mosaics to shock ro
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    const filtered = programsData.filter(program => 
-      program.score >= scoreThreshold && 
-      program.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let filtered = programsData.filter(program => {
+      const nameMatch = program.name.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      let scoreMatch;
+      if (useScoreRange) {
+        scoreMatch = program.score >= scoreThreshold && program.score <= maxScoreThreshold;
+      } else {
+        scoreMatch = program.score >= scoreThreshold;
+      }
+      
+      return nameMatch && scoreMatch;
+    });
+    
     setFilteredPrograms(filtered);
-  }, [programsData, scoreThreshold, searchTerm]);
+  }, [programsData, scoreThreshold, maxScoreThreshold, useScoreRange, searchTerm]);
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
@@ -231,6 +242,7 @@ INSTRUCTIONS:
 2. Modify 6-8 sentences throughout to reference program strengths, faculty, or unique features
 3. Maintain the original voice and authenticity - make it feel like the same person wrote it
 4. Connect the candidate's Nepal experience, teaching interest, and prevention focus to program specifics
+5. Reference specific faculty members, research areas, or clinical sites when relevant
 6. Ensure the modifications feel natural and not forced
 7. Keep the same overall structure and approximate length
 8. Make the essay sound like it was written specifically for this program by someone who genuinely researched it
@@ -409,18 +421,89 @@ The final essay should demonstrate genuine interest and knowledge of the program
 
           {/* Controls */}
           <div className="mb-8 p-6 bg-gray-50 border border-gray-200 rounded-lg">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">Score Threshold</label>
-                <input
-                  type="number"
-                  value={scoreThreshold}
-                  onChange={(e) => setScoreThreshold(parseInt(e.target.value))}
-                  min="0"
-                  max="100"
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+              <div className="lg:col-span-2">
+                <label className="flex items-center text-sm font-medium mb-2">
+                  <input
+                    type="checkbox"
+                    checked={useScoreRange}
+                    onChange={(e) => setUseScoreRange(e.target.checked)}
+                    className="mr-2"
+                  />
+                  Use Score Range (instead of minimum threshold)
+                </label>
+                
+                {useScoreRange ? (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="block text-xs text-gray-600 mb-1">Min Score</label>
+                        <input
+                          type="number"
+                          value={scoreThreshold}
+                          onChange={(e) => setScoreThreshold(parseInt(e.target.value))}
+                          min="0"
+                          max="100"
+                          className="w-full p-2 border border-gray-300 rounded-md text-sm"
+                          placeholder="Min"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-600 mb-1">Max Score</label>
+                        <input
+                          type="number"
+                          value={maxScoreThreshold}
+                          onChange={(e) => setMaxScoreThreshold(parseInt(e.target.value))}
+                          min="0"
+                          max="100"
+                          className="w-full p-2 border border-gray-300 rounded-md text-sm"
+                          placeholder="Max"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      <button
+                        onClick={() => {setScoreThreshold(80); setMaxScoreThreshold(100);}}
+                        className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded hover:bg-green-200"
+                      >
+                        Top Tier (80-100)
+                      </button>
+                      <button
+                        onClick={() => {setScoreThreshold(60); setMaxScoreThreshold(79);}}
+                        className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded hover:bg-blue-200"
+                      >
+                        Target (60-79)
+                      </button>
+                      <button
+                        onClick={() => {setScoreThreshold(40); setMaxScoreThreshold(59);}}
+                        className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded hover:bg-yellow-200"
+                      >
+                        Safety (40-59)
+                      </button>
+                      <button
+                        onClick={() => {setScoreThreshold(50); setMaxScoreThreshold(70);}}
+                        className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded hover:bg-purple-200"
+                      >
+                        Mid-Range (50-70)
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <label className="block text-xs text-gray-600 mb-1">Minimum Score Threshold</label>
+                    <input
+                      type="number"
+                      value={scoreThreshold}
+                      onChange={(e) => setScoreThreshold(parseInt(e.target.value))}
+                      min="0"
+                      max="100"
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                      placeholder="Min threshold"
+                    />
+                  </div>
+                )}
               </div>
+              
               <div>
                 <label className="block text-sm font-medium mb-2">Search Programs</label>
                 <div className="relative">
@@ -434,6 +517,7 @@ The final essay should demonstrate genuine interest and knowledge of the program
                   />
                 </div>
               </div>
+              
               <div className="flex items-end">
                 <button
                   onClick={processAllPrograms}
@@ -454,6 +538,36 @@ The final essay should demonstrate genuine interest and knowledge of the program
                 </button>
               </div>
             </div>
+            
+            {programsData.length > 0 && (
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <h4 className="font-semibold text-blue-800 mb-2">📊 Filtering Summary:</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                  <div>
+                    <span className="font-medium">Total Programs:</span>
+                    <span className="ml-2 text-blue-600">{programsData.length}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium">
+                      {useScoreRange ? `Range ${scoreThreshold}-${maxScoreThreshold}:` : `Score ≥${scoreThreshold}:`}
+                    </span>
+                    <span className="ml-2 text-green-600">{filteredPrograms.length}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium">Score Range:</span>
+                    <span className="ml-2 text-purple-600">
+                      {Math.min(...programsData.map(p => p.score))}-{Math.max(...programsData.map(p => p.score))}%
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-medium">Average Score:</span>
+                    <span className="ml-2 text-orange-600">
+                      {Math.round(programsData.reduce((acc, p) => acc + p.score, 0) / programsData.length)}%
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
             
             {isProcessing && (
               <div className="mt-4">
@@ -494,8 +608,15 @@ The final essay should demonstrate genuine interest and knowledge of the program
                     <span className="ml-2 text-blue-600">{programsData.length}</span>
                   </div>
                   <div>
-                    <span className="font-medium">Score ≥{scoreThreshold}:</span>
-                    <span className="ml-2 text-green-600">{programsData.filter(p => p.score >= scoreThreshold).length}</span>
+                    <span className="font-medium">
+                      {useScoreRange ? `Range ${scoreThreshold}-${maxScoreThreshold}:` : `Score ≥${scoreThreshold}:`}
+                    </span>
+                    <span className="ml-2 text-green-600">
+                      {useScoreRange ? 
+                        programsData.filter(p => p.score >= scoreThreshold && p.score <= maxScoreThreshold).length :
+                        programsData.filter(p => p.score >= scoreThreshold).length
+                      }
+                    </span>
                   </div>
                   <div>
                     <span className="font-medium">Highest Score:</span>
